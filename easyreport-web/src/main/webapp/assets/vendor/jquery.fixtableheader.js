@@ -40,9 +40,6 @@ jQuery.fn.fixTableHeader = function (gv, scrollHeight) {
 };
 jQuery.fn.fixScroll = function (scroll) {
 
-    /**
-     * fix 查询条件固定
-     */
     var $e = $(this),
         offset = $e.offset(),
         $scroll = scroll ? $(scroll) : $(window),
@@ -56,6 +53,9 @@ jQuery.fn.fixScroll = function (scroll) {
         scrollWdith = iswindow ? offset.top : offset.top - $scroll.offset().top,
         left = offset.left;
 
+    /**
+     * fix 查询条件固定
+     */
     fixDiv = $("<div />").css({
         "z-index": 2,
         width: "100%",
