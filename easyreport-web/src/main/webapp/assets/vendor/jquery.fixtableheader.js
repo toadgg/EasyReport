@@ -39,6 +39,10 @@ jQuery.fn.fixTableHeader = function (gv, scrollHeight) {
     });
 };
 jQuery.fn.fixScroll = function (scroll) {
+
+    /**
+     * fix 查询条件固定
+     */
     var $e = $(this),
         offset = $e.offset(),
         $scroll = scroll ? $(scroll) : $(window),
@@ -51,6 +55,22 @@ jQuery.fn.fixScroll = function (scroll) {
         }),
         scrollWdith = iswindow ? offset.top : offset.top - $scroll.offset().top,
         left = offset.left;
+
+    fixDiv = $("<div />").css({
+        "z-index": 2,
+        width: "100%",
+        height: $('#table-report-div').height()
+    });
+    $('#table-report-div').css({
+        position: "fixed",
+        width: $(this).width() + 1
+    });
+    $('#table-report-div')
+    $('#table-report-div').height();
+    $e.before(fixDiv);
+    /**
+     * fix end
+     */
 
     var first_TH = $(this).find('thead th:first-child');
     var first_TH_width = first_TH.width() + 7;
@@ -65,6 +85,7 @@ jQuery.fn.fixScroll = function (scroll) {
     if ($(this).data('isSort')) {
         cloneTh.css('cursor', 'pointer');
     }
+
     newDiv.append($("<table>").addClass("easyreport").append(cloneTh));
     $e.before(newDiv);
 
@@ -111,6 +132,7 @@ jQuery.fn.fixScroll = function (scroll) {
     $('#reportDiv').css('position', 'relative').append(fixedRow);
 
     var fixRow_TH = fixedRow.find('th');
+
     $scroll.bind("scroll", function () {
         var scrollLeft = $scroll.scrollLeft();
         if ($scroll.scrollTop() > scrollWdith) {
