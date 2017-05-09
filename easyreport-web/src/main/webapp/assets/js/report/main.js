@@ -37,18 +37,26 @@ var PreviewMainMVC = {
             var uid = $('#report-main-uid').val();
             var tableUrl = juicer(PreviewMainMVC.URLs.table.url, {uid: uid});
             var chartUrl = juicer(PreviewMainMVC.URLs.chart.url, {uid: uid});
-            PreviewMainMVC.Controller.updateTab('表格', tableUrl, TableReport.init);
-            PreviewMainMVC.Controller.updateTab('图表', chartUrl, ChartReport.init);
+
+            PreviewMainMVC.Controller.updateTab('表格', tableUrl, TableReport.init, true);
+            PreviewMainMVC.Controller.updateTab('图表', chartUrl, ChartReport.init, false);
         }
     },
     Controller: {
-        updateTab: function (which, href, onLoad) {
+        updateTab: function (which, href, onLoad, ready) {
             var tab = $('#report-main-tabs').tabs('getTab', which);
+            tab.ready = ready;
             $('#report-main-tabs').tabs('update', {
                 tab: tab,
                 options: {
                     onLoad: function () {
                         onLoad();
+                    },
+                    onOpen: function () {
+                        if (!tab.ready) {
+                            tab.ready = true;
+                            tab.panel('refresh');
+                        }
                     }
                 }
             });

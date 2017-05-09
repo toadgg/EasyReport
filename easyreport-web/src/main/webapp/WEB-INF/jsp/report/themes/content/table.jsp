@@ -11,7 +11,7 @@
                     <input id="table-report-isMergeRow" type="checkbox" name="isMergeRow" checked="checked"/>合并左边相同维度行
                     <a id="btn-generate" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-ok'">生成</a>
                 </td>
-                <td style="text-align: right;display: block;border: none;">
+                <td>
                     <img id="btn-export-excel" title="导出到Excel" style="cursor: pointer;padding-right: 5px;"
                          src="${ctxPath}/assets/custom/easyui/themes/icons/excel_24.png"/>
                     <input id="table-report-id" type="hidden" name="id" value="${id}"/>
